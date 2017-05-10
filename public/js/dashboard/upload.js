@@ -1,15 +1,18 @@
 function save_upload_to_user(filename, url) {
-    $.post(
-        "/dashboard/addFile",
-        {
-            filename: filename,
-            url: url
-        },
-        function(response) {
-            console.log("File uploaded:");
-            console.log(response);
-        }
-    );
+
+    show_modal(filename, function(filename, description) {
+        $.post(
+            "/dashboard/addFile", {
+                filename: filename,
+                description: description,
+                url: url
+            },
+            function(response) {
+                add_file(response);
+            }
+        );
+    });
+
 }
 
 function upload(file, signed_request, url, done) {

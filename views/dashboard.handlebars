@@ -1,23 +1,86 @@
-
 <div class="ui container">
-    Upload a file:
-    <input type="file" name="file" id="file-selection" class="inputfile" />
-</div> 
-<div class="ui container">
-    <table class="ui very basic selectable table">
-       
-        <tbody>
-            {{#each files}}
-            <tr>
-            	<td class="collapsing">
-                    <i class="{{icon}} icon"></i> {{filename}}
-                 </td>
-                <td>{{filetype}}</td>
-                <td><a href="{{url}}">Download</a></td>
-                <td>{{readable-date}}</td>
-            </tr></a>
-            {{/each}}
-        </tbody>
-    </table>
+    <div class="ui two column relaxed grid">
+        <div class="three wide column">
+            <div class="ui vertical menu">
+                <div class="item">
+                    <div class="ui transparent icon input">
+                        <input type="text" placeholder="Search files...">
+                        <i class="search icon"></i>
+                    </div>
+                </div>
+                <a class="item">
+                    <input type="file" name="file" id="file-selection" class="inputfile" />
+                    <label class="ui fluid small blue button" for="file-selection">Upload a file</label>
+                </a>
+                <div class="item">
+                    Home
+                    <div class="menu">
+                        <a class="active item">My files</a>
+                        <a class="item">Shared with me</a>
+                        <a class="item">Deleted Files</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="one wide column"></div>
+        <div class="twelve wide column">
+            <table class="ui very basic selectable table">
+                <tbody id="files-container">
+                    {{#each files}}
+                    <tr>
+                        <td class="collapsing">
+                            <i class="{{icon}} icon"></i> {{filename}}
+                        </td>
+                        <td>{{filetype}}</td>
+                        <td><a href="{{url}}">Download</a></td>
+                        <td>{{readable-date}}</td>
+                        <td class="collapsing">
+                            <div class="ui icon basic mini button"> Share </div>
+                        </td>
+                        <td class="collapsing">
+                            <div class="ui icon top left pointing dropdown basic mini button">
+                                <span class="text">...</span>
+                                <div class="menu">
+                                    <div class="header">File options</div>
+                                    <div class="item">Download</div>
+                                    <div class="item">Delete</div>
+                                    <div class="ui divider"></div>
+                                    <div class="item">Edit Name</div>
+                                    <div class="item">Edit Description</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            File details
+        </div>
+        <div class="image content">
+            <div class="description">
+                <div class="ui form">
+                    <div class="field">
+                        <label>File name: </label>
+                        <input placeholder="File Name" id="modal-file-name" type="text">
+                    </div>
+                    <div class="field" id="modal-description">
+                        <label>Description:</label>
+                        <textarea rows="2"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui positive right labeled icon button">
+                Save
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
 </div>
-{{addLocalJS '/js/dashboard/upload.js'}}
+{{addLocalCSS '/css/dashboard.css'}} {{addLocalJS '/js/dashboard/dashboard-ui.js'}} {{addLocalJS '/js/dashboard/upload.js'}}
