@@ -10,11 +10,11 @@ const schemaOptions = {
 
 const FileSchema = new Schema(
   {
-    name: {
+    filename: {
       type: String,
       required: true
     },
-    type: {
+    filetype: {
       type: String,
       required: true
     },

@@ -1,3 +1,17 @@
+function save_upload_to_user(filename, url) {
+    $.post(
+        "/dashboard/addFile",
+        {
+            filename: filename,
+            url: url
+        },
+        function(response) {
+            console.log("File uploaded:");
+            console.log(response);
+        }
+    );
+}
+
 function upload(file, signed_request, url, done) {
     var xhr = new XMLHttpRequest();
     xhr.open("PUT", signed_request);
@@ -31,7 +45,7 @@ document.getElementById("file-selection").onchange = function() {
 
     sign_request(file, function(response) {
         upload(file, response.signed_request, response.url, function() {
-            console.log(response);
+            save_upload_to_user(file.name, response.url);
         });
     });
 };
