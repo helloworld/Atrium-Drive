@@ -2,5 +2,7 @@
 
 // GET /
 exports.index = function(req, res) {
-    res.send("hi");
+    res.render('home', {
+        title: 'Atrium-Drive'
+    });
 };
