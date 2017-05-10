@@ -34,6 +34,12 @@
                         <td>{{filetype}}</td>
                         <td><a href="{{url}}">Download</a></td>
                         <td>{{readable-date}}</td>
+                        <td>
+                            <div class="ui popup icon button" data-content="{{description}}" data-variation="basic">
+                            Description
+                              <i class="dropdown icon"></i>
+                            </div>
+                        </td>
                         <td class="collapsing">
                             <div class="ui icon basic mini button"> Share </div>
                         </td>
@@ -54,33 +60,33 @@
                     {{/each}}
                 </tbody>
             </table>
+            </div>
         </div>
-    </div>
-    <div class="ui modal">
-        <i class="close icon"></i>
-        <div class="header">
-            File details
-        </div>
-        <div class="image content">
-            <div class="description">
-                <div class="ui form">
-                    <div class="field">
-                        <label>File name: </label>
-                        <input placeholder="File Name" id="modal-file-name" type="text">
-                    </div>
-                    <div class="field" id="modal-description">
-                        <label>Description:</label>
-                        <textarea rows="2"></textarea>
+        <div class="ui modal">
+            <i class="close icon"></i>
+            <div class="header">
+                File details
+            </div>
+            <div class="image content">
+                <div class="description">
+                    <div class="ui form">
+                        <div class="field">
+                            <label>File name: </label>
+                            <input placeholder="File Name" id="modal-file-name" type="text">
+                        </div>
+                        <div class="field" id="modal-description">
+                            <label>Description:</label>
+                            <textarea rows="2"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="actions">
-            <div class="ui positive right labeled icon button">
-                Save
-                <i class="checkmark icon"></i>
+            <div class="actions">
+                <div class="ui positive right labeled icon button">
+                    Save
+                    <i class="checkmark icon"></i>
+                </div>
             </div>
         </div>
     </div>
-</div>
-{{addLocalCSS '/css/dashboard.css'}} {{addLocalJS '/js/dashboard/dashboard-ui.js'}} {{addLocalJS '/js/dashboard/upload.js'}}
+    {{addLocalCSS '/css/dashboard.css'}} {{addLocalJS '/js/dashboard/dashboard-ui.js'}} {{addLocalJS '/js/dashboard/upload.js'}}
