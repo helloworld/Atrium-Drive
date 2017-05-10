@@ -1,6 +1,13 @@
 <div class="ui container">
 	Upload a file: 
 	<input type="file" name="file" id="file-selection" class="inputfile" />
+
+	<h3>Files</h3>
+	<ul>
+		{{#each files}}
+			<li>Name: {{filename}}, Link: <a href="{{url}}">download</a></li>
+		{{/each}}
+	</ul>
 </div>
 
 {{addLocalJS '/js/dashboard/upload.js'}}
