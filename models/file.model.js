@@ -28,14 +28,13 @@ const fileSchema = new Schema(
       type: String, 
       required: true, 
     },
-    created_at: Date,
     user_id: Schema.Types.ObjectId
   },
   schemaOptions
 );
 
 fileSchema.virtual('readable-date').get(function() {
-    let date = moment(this.get("created_at"));
+    let date = moment(this.get("createdAt"));
     return date.calendar();
 });
 
