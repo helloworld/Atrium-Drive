@@ -6,3 +6,9 @@ exports.index = function(req, res) {
         title: 'Atrium-Drive'
     });
 };
+
+exports.terms = function(req, res) {
+    res.render('terms', {
+        title: 'Terms of Service'
+    });
+};

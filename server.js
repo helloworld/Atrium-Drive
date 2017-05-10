@@ -20,6 +20,7 @@ dotenv.load();
 
 // -- Controllers --------------------------------------------------------------
 var HomeController = require("./controllers/home.controller");
+var userController = require("./controllers/user.controller");
 
 //-- Connect to MongoDB --------------------------------------------------------
 mongoose.connect(process.env.MONGODB);
@@ -71,6 +72,12 @@ app.use(router);
 
 //-- Routes --------------------------------------------------------------------
 router.get("/", HomeController.index);
+router.get("/terms", HomeController.terms);
+
+
+router.get("/login", userController.loginGet);
+router.get("/signup", userController.signupGet);
+
 
 //-- Start Server --------------------------------------------------------------
 app.listen(process.env.PORT, function() {

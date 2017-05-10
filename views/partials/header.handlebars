@@ -4,5 +4,23 @@
         <a href="/" class="header item">
             <img class="logo" src="/img/atrium.png"> Atrium-Drive
         </a>
+        {{#if user}} 
+            <div class="ui right floated dropdown item">
+                {{user.name}}'s Account<i class="dropdown icon"></i>
+                <div class="menu">
+                    <a href="/account" class="item">Account Settings</a>
+                    <a href="/logout" class="item">Logout</a>
+                </div>
+            </div> 
+        {{else}}
+            <div class="ui right floated dropdown item">
+                Login/Signup <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a href="/login" class="item">Login</a>
+                    <div class="divider"></div>
+                    <a href="/signup" class="item">Signup</a>
+                </div>
+            </div>
+        {{/if}}
     </div>
 </div>

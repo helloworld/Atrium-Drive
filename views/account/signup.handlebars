@@ -1,0 +1,43 @@
+<div class="ui text container">
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <h2 class="ui green image header">
+          <div class="content">
+            Create an account
+          </div>
+        </h2>
+            <form class="ui large form {{#if messages.error}}error{{/if}}" method="POST">
+                <div class="ui stacked segment">
+                    <input type='hidden' name='_csrf' value={{_csrf}} />
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="email" name="email" id="email" placeholder="Email address" autofocus>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text" name="name" id="name" placeholder="Full Name" autofocus>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="password" id="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <button type="submit" class="ui fluid large green submit button">Create Account</button>
+                </div>
+                <p>By signing up, you agree to the <a href="/terms">Terms of Service</a>.</p>
+                <div class="ui error message">
+                    {{> flash}}
+                </div>
+            </form>
+            <div class="ui message">
+                Already have an account? <a href="/login">Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+

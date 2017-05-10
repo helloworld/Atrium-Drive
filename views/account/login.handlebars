@@ -1,0 +1,34 @@
+<div class="ui text container">
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <h2 class="ui red image header">
+          <div class="content">
+            Log-in to your account
+          </div>
+        </h2>
+            <form class="ui large form {{#if messages.error}} error {{/if}}" method="POST">
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="email" name="email" id="email" placeholder="Email address" autofocus>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="password" id="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <button type="submit" class="ui fluid large red submit button">Login</button>
+                </div>
+                <div class="ui error message">
+                    {{> flash}}
+                </div>
+            </form>
+            <div class="ui message">
+                New to us? <a href="/signup">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</div>
