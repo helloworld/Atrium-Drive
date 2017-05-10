@@ -1,13 +1,23 @@
+
 <div class="ui container">
-	Upload a file: 
-	<input type="file" name="file" id="file-selection" class="inputfile" />
-
-	<h3>Files</h3>
-	<ul>
-		{{#each files}}
-			<li>Name: {{filename}}, Link: <a href="{{url}}">download</a></li>
-		{{/each}}
-	</ul>
+    Upload a file:
+    <input type="file" name="file" id="file-selection" class="inputfile" />
+</div> 
+<div class="ui container">
+    <table class="ui very basic selectable table">
+       
+        <tbody>
+            {{#each files}}
+            <tr>
+            	<td class="collapsing">
+                    <i class="{{icon}} icon"></i> {{filename}}
+                 </td>
+                <td>{{filetype}}</td>
+                <td><a href="{{url}}">Download</a></td>
+                <td>{{readable-date}}</td>
+            </tr></a>
+            {{/each}}
+        </tbody>
+    </table>
 </div>
-
 {{addLocalJS '/js/dashboard/upload.js'}}

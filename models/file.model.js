@@ -1,4 +1,6 @@
 let mongoose = require("mongoose");
+let moment = require("moment");
+
 let Schema = mongoose.Schema;
 
 const schemaOptions = {
@@ -8,7 +10,7 @@ const schemaOptions = {
   }
 };
 
-const FileSchema = new Schema(
+const fileSchema = new Schema(
   {
     filename: {
       type: String,
@@ -22,10 +24,19 @@ const FileSchema = new Schema(
       type: String, 
       required: true, 
     },
+    icon: {
+      type: String, 
+      required: true, 
+    },
     created_at: Date,
     user_id: Schema.Types.ObjectId
   },
   schemaOptions
 );
 
-module.exports = mongoose.model("File", FileSchema);
+fileSchema.virtual('readable-date').get(function() {
+    let date = moment(this.get("created_at"));
+    return date.calendar();
+});
+
+module.exports = mongoose.model("File", fileSchema);
