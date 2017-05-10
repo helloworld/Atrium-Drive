@@ -73,12 +73,13 @@ app.use(function(req, res, next) {
 app.use(router);
 
 //-- Routes --------------------------------------------------------------------
+let authenticated = userController.ensureAuthenticated;
+
 router.get("/", HomeController.index);
 router.get("/terms", HomeController.terms);
 
-router.get("/dashboard", dashboardController.index);
-
-router.get('/sign', awsController.sign);
+router.get("/dashboard", authenticated, dashboardController.index);
+router.get('/sign', authenticated, awsController.sign);
 
 router.get("/logout", userController.logout);
 router.get("/login", userController.loginGet);
