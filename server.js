@@ -22,6 +22,7 @@ dotenv.load();
 var HomeController = require("./controllers/home.controller");
 var userController = require("./controllers/user.controller");
 var dashboardController = require("./controllers/dashboard.controller");
+var awsController = require("./controllers/aws.controller");
 
 //-- Connect to MongoDB --------------------------------------------------------
 mongoose.connect(process.env.MONGODB);
@@ -76,6 +77,8 @@ router.get("/", HomeController.index);
 router.get("/terms", HomeController.terms);
 
 router.get("/dashboard", dashboardController.index);
+
+router.get('/sign', awsController.sign);
 
 router.get("/logout", userController.logout);
 router.get("/login", userController.loginGet);

@@ -3,3 +3,8 @@ PORT=3000
 
 # MongoDB Connection URL
 MONGODB="mongodb://localhost:27017/dbname"
+
+# AWS S3
+AWS_ACCESS_KEY='...'
+AWS_SECRET_KEY='...'
+S3_BUCKET='...'
