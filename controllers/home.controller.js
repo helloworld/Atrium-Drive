@@ -7,6 +7,7 @@ exports.index = function(req, res) {
     });
 };
 
+// GET /terms
 exports.terms = function(req, res) {
     res.render('terms', {
         title: 'Terms of Service'
