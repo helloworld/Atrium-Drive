@@ -21,6 +21,13 @@ dotenv.load();
 // -- Controllers --------------------------------------------------------------
 var HomeController = require("./controllers/home.controller");
 
+//-- Connect to MongoDB --------------------------------------------------------
+mongoose.connect(process.env.MONGODB);
+mongoose.connection.on("error", function() {
+    console.log("MongoDB Connection Error.");
+    process.exit(1);
+});
+
 //-- Setup Express App ---------------------------------------------------------
 let app = express();
 state.extend(app);
