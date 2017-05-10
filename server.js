@@ -75,8 +75,11 @@ router.get("/", HomeController.index);
 router.get("/terms", HomeController.terms);
 
 
+router.get("/logout", userController.logout);
 router.get("/login", userController.loginGet);
+router.post("/login", userController.loginPost);
 router.get("/signup", userController.signupGet);
+router.post("/signup", userController.signupPost);
 
 
 //-- Start Server --------------------------------------------------------------
