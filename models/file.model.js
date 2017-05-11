@@ -28,6 +28,9 @@ const fileSchema = new Schema(
       type: String, 
       required: true, 
     },
+    description: {
+      type: String,
+    },
     user_id: Schema.Types.ObjectId
   },
   schemaOptions

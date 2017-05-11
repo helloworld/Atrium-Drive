@@ -12,11 +12,14 @@ function event_handlers() {
 }
 
 function perform_action(value, _id) {
+	if (value == "download") return download_file(_id);
 	if (value == "delete") return delete_file(_id);
-	if(value == "edit name") return edit_file(_id);
+	if (value == "edit name") return edit_file(_id);
+	if (value == "edit description") return edit_file(_id);
 }
 
 function save_file(filename, description, url) {
+	console.log(filename, description)
 	$.post(
 		"/dashboard/addFile",
 		{
@@ -43,15 +46,26 @@ function delete_file(_id) {
 }
 
 function edit_file(_id) {
-	console.log("edit", _id);
+	var $row = $("#files-container").find(`tr[data-id='${_id}']`);
+	var filename = $row.find("#filename").text();
+	var description = $row.find("#description").data("content");
+	show_modal(filename, description, function(new_filename, new_description) {
+		$row.find("#filename").text(new_filename);
+		$row.find("#description").attr("data-content", new_description);
+	})
+}	
+
+function download_file(_id) {
+	debugger;
+	$("#download-link" + _id).click();
 }
 
-function show_modal(filename, callback) {
+function show_modal(filename, description, callback) {
 	$filename_field = $("#modal-file-name");
 	$description_field = $("#modal-description");
 
 	$filename_field.val(filename);
-	$description_field.val("");
+	$description_field.val(description);
 
 	$(".ui.modal")
 		.modal({
@@ -89,7 +103,7 @@ function add_file_to_page(file) {
 		        <div class="ui icon basic mini button"> Share </div>
 		    </td>
 		    <td class="collapsing">
-		        <div class="ui icon top left pointing dropdown basic mini button" data-id="${file._id}">
+		        <div class="ui icon top left pointing options dropdown basic mini button" data-id="${file._id}">
 		            <span class="text">...</span>
 		            <div class="menu">
 		                <div class="header">File options</div>

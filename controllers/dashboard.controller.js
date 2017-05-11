@@ -33,6 +33,7 @@ exports.addFile = function(req, res) {
 		filetype: ext,
 		icon: icon,
 		url: req.body.url,
+		description: req.body.description,
 		user_id: req.user._id
 	});
 

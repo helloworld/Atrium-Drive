@@ -29,22 +29,24 @@
                     {{#each files}}
                     <tr data-id="{{_id}}">
                         <td class="collapsing">
-                            <i class="{{icon}} icon"></i> {{filename}}
+                            <i class="{{icon}} icon"></i> <span id="filename">{{filename}}</span>
                         </td>
                         <td>{{filetype}}</td>
-                        <td><a href="{{url}}">Download</a></td>
+                        <td><a id="download-link{{id}}" href="{{url}}">Download</a></td>
                         <td>{{readable-date}}</td>
                         <td>
-                            <div class="ui description dropdown" data-content="{{description}}" data-variation="basic">
+                            {{#if description}}
+                            <div class="ui description dropdown" id="description" data-content="{{description}}" data-variation="basic">
                               <div class="text">Description</div>
                               <i class="dropdown icon"></i>
                             </div>
+                            {{/if}}
                         </td>
                         <td class="collapsing">
                             <div class="ui icon basic mini button"> Share </div>
                         </td>
                         <td class="collapsing">
-                            <div class="ui icon top left pointing dropdown basic mini button" data-id="{{_id}}">
+                            <div class="ui icon top left pointing options dropdown basic mini button" data-id="{{_id}}">
                                 <span class="text">...</span>
                                 <div class="menu">
                                     <div class="header">File options</div>
@@ -74,9 +76,9 @@
                             <label>File name: </label>
                             <input placeholder="File Name" id="modal-file-name" type="text">
                         </div>
-                        <div class="field" id="modal-description">
+                        <div class="field">
                             <label>Description:</label>
-                            <textarea rows="2"></textarea>
+                            <textarea  id="modal-description" rows="2"></textarea>
                         </div>
                     </div>
                 </div>
