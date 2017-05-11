@@ -33,12 +33,13 @@ exports.sign = function(req, res) {
         });
     });
 };
-exports.delete = function(file_name) {
+
+exports.delete = function(filename) {
     var options = {
         Bucket: S3_BUCKET,
         Delete: {
             Objects: [{
-                Key: file_name
+                Key: filename
             }]
         }
     };
@@ -48,5 +49,16 @@ exports.delete = function(file_name) {
     });
 }
 
+exports.copy = function(filename, new_filename, callback) {
+    var options = {
+        Bucket: S3_BUCKET,
+        CopySource: S3_BUCKET + "/" + encodeURIComponent(filename), 
+        Key: new_filename,
+        ACL: "public-read"
+    };
 
-
+    s3.copyObject(options, function(err, data) {
+      if (err) throw err;
+      callback();
+    });
+}

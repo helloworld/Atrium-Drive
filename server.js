@@ -24,6 +24,7 @@ var HomeController = require("./controllers/home.controller");
 var userController = require("./controllers/user.controller");
 var dashboardController = require("./controllers/dashboard.controller");
 var awsController = require("./controllers/aws.controller");
+var apiController = require("./controllers/api.controller");
 
 //-- Connect to MongoDB --------------------------------------------------------
 mongoose.connect(process.env.MONGODB);
@@ -82,6 +83,7 @@ router.get("/terms", HomeController.terms);
 
 router.get("/dashboard", authenticated, dashboardController.index);
 router.post("/dashboard/addFile", authenticated, dashboardController.addFile);
+router.post("/dashboard/editFile", authenticated, dashboardController.editFile);
 router.post("/dashboard/deleteFile", authenticated, dashboardController.deleteFile);
 router.post('/dashboard/newToken', userController.ensureAuthenticated, dashboardController.newToken);
 router.get('/sign', authenticated, awsController.sign);

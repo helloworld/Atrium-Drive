@@ -50,13 +50,24 @@ function edit_file(_id) {
 	var description = $row.find("#description").data("content");
 	if(description == "No description") description = "";
 	show_modal(filename, description, function(new_filename, new_description) {
-		$row.find("#filename").text(new_filename);
-		$row.find("#description").attr("data-content", new_description);
+		$.post(
+			"/dashboard/editFile",
+			{
+				_id: _id, 
+				new_filename: new_filename, 
+				new_description: new_description,
+			},
+			function(new_url) {
+				$row.find("#filename").text(new_filename);
+				$row.find("#description").attr("data-content", new_description);
+				$row.find("#download-link" + _id).attr("href", new_url)
+			}
+		);
 	})
 }	
 
 function download_file(_id) {
-	var url = $("#download-link" + _id).attr("href")
+	var url = $("#download-link" + _id).attr("href");
 	$('<form target="_blank"> </form>').attr('action', url).appendTo('body').submit().remove();
 }
 
