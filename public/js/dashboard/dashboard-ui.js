@@ -12,7 +12,7 @@ function event_handlers() {
 }
 
 function perform_action(value, _id) {
-	if (value == "download") return download_file(_id);
+	if (value == "open in browser") return download_file(_id);
 	if (value == "delete") return delete_file(_id);
 	if (value == "edit name") return edit_file(_id);
 	if (value == "edit description") return edit_file(_id);
@@ -56,8 +56,8 @@ function edit_file(_id) {
 }	
 
 function download_file(_id) {
-	debugger;
-	$("#download-link" + _id).click();
+	var url = $("#download-link" + _id).attr("href")
+	$('<form target="_blank"> </form>').attr('action', url).appendTo('body').submit().remove();
 }
 
 function show_modal(filename, description, callback) {
