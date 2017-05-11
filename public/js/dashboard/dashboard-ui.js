@@ -1,11 +1,20 @@
 $files_container = $("#files-container");
 
-$(".dropdown").dropdown({
-	action: "hide",
-	onChange: function(value) {
-		perform_action(value, $(this).data("id"));
-	}
-});
+function event_handlers() {
+	$(".options.dropdown").dropdown({
+		action: "hide",
+		onChange: function(value) {
+			perform_action(value, $(this).data("id"));
+		}
+	});
+
+	$('.ui.description').popup();
+}
+
+function perform_action(value, _id) {
+	if (value == "delete") return delete_file(_id);
+	if(value == "edit name") return edit_file(_id);
+}
 
 function save_file(filename, description, url) {
 	$.post(
@@ -33,8 +42,8 @@ function delete_file(_id) {
 	);
 }
 
-function perform_action(value, _id) {
-	if (value == "delete") return delete_file(_id);
+function edit_file(_id) {
+	console.log("edit", _id);
 }
 
 function show_modal(filename, callback) {
@@ -63,16 +72,24 @@ function remove_file_from_page(_id) {
 function add_file_to_page(file) {
 	$files_container.append(
 		`
-		<tr>
+		<tr data-id="${file._id}">
 		    <td class="collapsing">
 		        <i class="${file.icon} icon"></i> ${file.filename}
 		    </td>
 		    <td>${file.filetype}</td>
 		    <td><a href="${file.url}">Download</a></td>
 		    <td>${file["readable-date"]}</td>
-		    <td class="collapsing"> <div class="ui icon basic mini button"> Share </div> </td>
+		    <td>
+		        <div class="ui popup icon button" data-content="${file.description}" data-variation="basic">
+		        Description
+		          <i class="dropdown icon"></i>
+		        </div>
+		    </td>
 		    <td class="collapsing">
-		        <div class="ui icon top left pointing dropdown basic mini button">
+		        <div class="ui icon basic mini button"> Share </div>
+		    </td>
+		    <td class="collapsing">
+		        <div class="ui icon top left pointing dropdown basic mini button" data-id="${file._id}">
 		            <span class="text">...</span>
 		            <div class="menu">
 		                <div class="header">File options</div>
@@ -86,4 +103,8 @@ function add_file_to_page(file) {
 		    </td>
 		</tr>`
 	);
+
+	event_handlers();
 }
+
+event_handlers();
