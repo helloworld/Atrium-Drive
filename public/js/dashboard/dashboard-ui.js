@@ -95,41 +95,7 @@ function remove_file_from_page(_id) {
 }
 
 function add_file_to_page(file, description) {
-	$files_container.append(
-		`
-		<tr data-id="${file._id}">
-		    <td class="collapsing">
-		        <i class="${file.icon} icon"></i> ${file.filename}
-		    </td>
-		    <td>${file.filetype}</td>
-		    <td><a id="download-link${file._id}" href="${file.url}" target="_blank">Download</a></td>
-		    <td>${file["readable-date"]}</td>
-		    <td>
-		        <div class="ui description dropdown" id="description" data-content="${description}" data-variation="basic">
-		          <div class="text">Description</div>
-		          <i class="dropdown icon"></i>
-		        </div>
-		    </td>
-		    <td class="collapsing">
-		        <div class="ui icon basic mini button"> Share </div>
-		    </td>
-		    <td class="collapsing">
-		        <div class="ui icon top left pointing options dropdown basic mini button" data-id="${file._id}">
-		            <span class="text">...</span>
-		            <div class="menu">
-		                <div class="header">File options</div>
-		                <div class="item">Download</div>
-		                <div class="item">Delete</div>
-		                <div class="ui divider"></div>
-		                <div class="item">Edit Name</div>
-		                <div class="item">Edit Description</div>
-		            </div>
-		        </div>
-		    </td>
-		</tr>`
-	);
-
-	event_handlers();
+	return location.reload();
 }
 
 event_handlers();
