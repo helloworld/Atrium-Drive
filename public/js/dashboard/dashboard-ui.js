@@ -7,8 +7,6 @@ function event_handlers() {
 			perform_action(value, $(this).data("id"));
 		}
 	});
-
-	$('.ui.description').popup();
 }
 
 function perform_action(value, _id) {
@@ -49,6 +47,7 @@ function edit_file(_id) {
 	var $row = $("#files-container").find(`tr[data-id='${_id}']`);
 	var filename = $row.find("#filename").text();
 	var description = $row.find("#description").data("content");
+	if(description == "No description") description = "";
 	show_modal(filename, description, function(new_filename, new_description) {
 		$row.find("#filename").text(new_filename);
 		$row.find("#description").attr("data-content", new_description);
@@ -122,3 +121,5 @@ function add_file_to_page(file) {
 }
 
 event_handlers();
+$('.ui.description').popup();
+
