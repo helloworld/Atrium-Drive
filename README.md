@@ -6,6 +6,7 @@
 - Node.js
 - NPM 
 - MongoDB
+- AWS S3
 
 ### Installation 
 
@@ -13,4 +14,5 @@
 - Change `.envExample` to `.env` and edit variables appropriately
 - Run `npm install`
 - Run `node server.js`
+
 
