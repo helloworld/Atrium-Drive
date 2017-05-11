@@ -25,6 +25,17 @@
         <div class="one wide column"></div>
         <div class="twelve wide column">
             <table class="ui very basic selectable table">
+                <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>File Type</th>
+                      <th>Download</th>
+                      <th>Upload Date</th>
+                      <th>Description</th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>
                 <tbody id="files-container">
                     {{#each files}}
                     <tr data-id="{{_id}}">
