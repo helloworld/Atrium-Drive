@@ -83,7 +83,7 @@ exports.newToken = function(req, res) {
             req.flash('success', {
                 msg: 'New API Token has been generated'
             });
-            res.redirect('/dashboard');
+            res.redirect('/account');
         });
     });
 }
