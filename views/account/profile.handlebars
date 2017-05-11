@@ -1,6 +1,7 @@
 <div class="ui text container">
     {{> flash}}
     <h4>Profile Information</h4>
+
     <form class="ui form" method="POST" action="/account?_method=PUT">
         <div class="field">
             <label for="email">Email</label>
@@ -24,6 +25,28 @@
         </div>
         <button class="ui button" type="submit">Change Password</button>
     </form>
+    <h4>API Token</h4>
+    {{#if user.api_token}}
+    <div class="ui clearing segment">
+        <b>Your API Token is: </b>
+        <div class="ui huge label"><code>{{user.api_token}}</code></div>
+        <br>
+        <br>
+        <form class="ui form" method="POST" action="/dashboard/newToken">
+            <button class="ui red button" type="submit">Generate New Token</button>
+        </form>
+    </div>
+    {{else}}
+    <div class="ui clearing segment">
+
+    <p>You currently do not have an API Token! Click the button below to generate a new one to get started:</p>
+    <form class="ui form" method="POST" action="/dashboard/newToken">
+        <button class="ui green button" type="submit">Generate New Token</button>
+    </form>
+    </div>
+    {{/if}}
+
+
     <h4>Delete Account</h4>
     <form class="ui form" method="POST" action="/account?_method=DELETE">
         <p>You can delete your account, but keep in mind this action is irreversible.</p>

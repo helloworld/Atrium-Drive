@@ -18,6 +18,7 @@ var userSchema = new mongoose.Schema({
     password: String,
     passwordResetToken: String,
     passwordResetExpires: Date,
+    api_token: String,
     date: { type: Date, default: Date.now },
 }, schemaOptions);
 

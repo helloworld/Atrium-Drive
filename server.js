@@ -83,6 +83,7 @@ router.get("/terms", HomeController.terms);
 router.get("/dashboard", authenticated, dashboardController.index);
 router.post("/dashboard/addFile", authenticated, dashboardController.addFile);
 router.post("/dashboard/deleteFile", authenticated, dashboardController.deleteFile);
+router.post('/dashboard/newToken', userController.ensureAuthenticated, dashboardController.newToken);
 router.get('/sign', authenticated, awsController.sign);
 
 router.get("/logout", userController.logout);
@@ -93,6 +94,9 @@ router.post("/signup", userController.signupPost);
 router.get('/account', userController.ensureAuthenticated, userController.accountGet);
 router.put('/account', userController.ensureAuthenticated, userController.accountPut);
 router.delete('/account', userController.ensureAuthenticated, userController.accountDelete);
+
+router.get("/api/list", apiController.list);
+router.delete("/api/delete/:_id", apiController.delete);
 
 
 //-- Start Server --------------------------------------------------------------
