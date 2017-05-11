@@ -7,6 +7,7 @@ function event_handlers() {
 			perform_action(value, $(this).data("id"));
 		}
 	});
+	$('.ui.description').popup();
 }
 
 function perform_action(value, _id) {
@@ -26,7 +27,7 @@ function save_file(filename, description, url) {
 			url: url
 		},
 		function(response) {
-			add_file_to_page(response);
+			add_file_to_page(response, description);
 		}
 	);
 }
@@ -82,7 +83,7 @@ function remove_file_from_page(_id) {
 	$("#files-container").find(`tr[data-id='${_id}']`).remove();
 }
 
-function add_file_to_page(file) {
+function add_file_to_page(file, description) {
 	$files_container.append(
 		`
 		<tr data-id="${file._id}">
@@ -93,8 +94,8 @@ function add_file_to_page(file) {
 		    <td><a href="${file.url}">Download</a></td>
 		    <td>${file["readable-date"]}</td>
 		    <td>
-		        <div class="ui popup icon button" data-content="${file.description}" data-variation="basic">
-		        Description
+		        <div class="ui description dropdown" id="description" data-content="${description}" data-variation="basic">
+		          <div class="text">Description</div>
 		          <i class="dropdown icon"></i>
 		        </div>
 		    </td>
@@ -121,5 +122,4 @@ function add_file_to_page(file) {
 }
 
 event_handlers();
-$('.ui.description').popup();
 
