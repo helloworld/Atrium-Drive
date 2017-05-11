@@ -80,6 +80,8 @@ let authenticated = userController.ensureAuthenticated;
 
 router.get("/", HomeController.index);
 router.get("/terms", HomeController.terms);
+router.get("/documentation", HomeController.documentation);
+
 
 router.get("/dashboard", authenticated, dashboardController.index);
 router.post("/dashboard/addFile", authenticated, dashboardController.addFile);

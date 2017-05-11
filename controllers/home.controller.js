@@ -10,9 +10,17 @@ exports.index = function(req, res) {
     });
 };
 
+// GET /documentation
+exports.documentation = function(req, res) {
+    res.render('documentation', {
+        title: "Documentation"
+    })
+}
+
 // GET /terms
 exports.terms = function(req, res) {
     res.render('terms', {
         title: 'Terms of Service'
     });
 };
+
