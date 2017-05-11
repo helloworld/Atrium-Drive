@@ -27,7 +27,7 @@
             <table class="ui very basic selectable table">
                 <tbody id="files-container">
                     {{#each files}}
-                    <tr>
+                    <tr data-id="{{_id}}">
                         <td class="collapsing">
                             <i class="{{icon}} icon"></i> {{filename}}
                         </td>
@@ -44,7 +44,7 @@
                             <div class="ui icon basic mini button"> Share </div>
                         </td>
                         <td class="collapsing">
-                            <div class="ui icon top left pointing dropdown basic mini button">
+                            <div class="ui icon top left pointing dropdown basic mini button" data-id="{{_id}}">
                                 <span class="text">...</span>
                                 <div class="menu">
                                     <div class="header">File options</div>
@@ -89,4 +89,7 @@
             </div>
         </div>
     </div>
-    {{addLocalCSS '/css/dashboard.css'}} {{addLocalJS '/js/dashboard/dashboard-ui.js'}} {{addLocalJS '/js/dashboard/upload.js'}}
+
+    {{addLocalCSS '/css/dashboard.css'}} 
+    {{addLocalJS '/js/dashboard/dashboard-ui.js'}} 
+    {{addLocalJS '/js/dashboard/upload.js'}}

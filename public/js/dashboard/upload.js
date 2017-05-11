@@ -1,20 +1,3 @@
-function save_upload_to_user(filename, url) {
-
-    show_modal(filename, function(filename, description) {
-        $.post(
-            "/dashboard/addFile", {
-                filename: filename,
-                description: description,
-                url: url
-            },
-            function(response) {
-                add_file(response);
-            }
-        );
-    });
-
-}
-
 function upload(file, signed_request, url, done) {
     var xhr = new XMLHttpRequest();
     xhr.open("PUT", signed_request);
@@ -46,9 +29,11 @@ document.getElementById("file-selection").onchange = function() {
     var file = document.getElementById("file-selection").files[0];
     if (!file) return;
 
-    sign_request(file, function(response) {
-        upload(file, response.signed_request, response.url, function() {
-            save_upload_to_user(file.name, response.url);
+    show_modal(file.name, function(filename, description) {
+        sign_request(file, function(response) {
+            upload(file, response.signed_request, response.url, function(data) {
+                save_file(filename, description, response.url);
+            });
         });
     });
 };

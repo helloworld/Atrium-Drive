@@ -41,3 +41,13 @@ exports.addFile = function(req, res) {
 		res.json(new_file);
 	});
 };
+
+exports.deleteFile = function(req, res) {
+    Document.findOneAndRemove({ _id: req.body._id }, function(err, file) {
+        if (err) throw err;
+        if (!file) {
+            return res.send('No file found with id: ' + req.body.id);
+        }
+        res.send('200');
+    });
+};

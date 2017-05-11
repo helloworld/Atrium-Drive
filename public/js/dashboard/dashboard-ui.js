@@ -1,6 +1,41 @@
 $files_container = $("#files-container");
 
-$(".ui.dropdown").dropdown();
+$(".dropdown").dropdown({
+	action: "hide",
+	onChange: function(value) {
+		perform_action(value, $(this).data("id"));
+	}
+});
+
+function save_file(filename, description, url) {
+	$.post(
+		"/dashboard/addFile",
+		{
+			filename: filename,
+			description: description,
+			url: url
+		},
+		function(response) {
+			add_file_to_page(response);
+		}
+	);
+}
+
+function delete_file(_id) {
+	$.post(
+		"/dashboard/deleteFile",
+		{
+			_id: _id
+		},
+		function(response) {
+			remove_file_from_page(response);
+		}
+	);
+}
+
+function perform_action(value, _id) {
+	if (value == "delete") return delete_file(_id);
+}
 
 function show_modal(filename, callback) {
 	$filename_field = $("#modal-file-name");
@@ -21,8 +56,11 @@ function show_modal(filename, callback) {
 		.modal("show");
 }
 
-function add_file(file) {
-	console.log(file);
+function remove_file_from_page(_id) {
+	$("#files-container").find(`tr[data-id='${_id}']`).remove();
+}
+
+function add_file_to_page(file) {
 	$files_container.append(
 		`
 		<tr>
