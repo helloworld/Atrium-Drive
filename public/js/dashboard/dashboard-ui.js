@@ -28,7 +28,7 @@ function delete_file(_id) {
 			_id: _id
 		},
 		function(response) {
-			remove_file_from_page(response);
+			remove_file_from_page(_id);
 		}
 	);
 }
