@@ -3,6 +3,7 @@ let mongoose = require("mongoose");
 let dotenv = require("dotenv");
 let bodyParser = require("body-parser");
 var compression = require("compression");
+var methodOverride = require('method-override');
 let state = require("express-state");
 let exphbs = require("express-handlebars");
 let validator = require("express-validator");
@@ -58,6 +59,7 @@ app.use(bodyParser.json());
 app.use(flash());
 app.use(validator());
 app.use(compression());
+app.use(methodOverride('_method'));
 
 app.use(
     session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
@@ -88,6 +90,9 @@ router.get("/login", userController.loginGet);
 router.post("/login", userController.loginPost);
 router.get("/signup", userController.signupGet);
 router.post("/signup", userController.signupPost);
+router.get('/account', userController.ensureAuthenticated, userController.accountGet);
+router.put('/account', userController.ensureAuthenticated, userController.accountPut);
+router.delete('/account', userController.ensureAuthenticated, userController.accountDelete);
 
 
 //-- Start Server --------------------------------------------------------------

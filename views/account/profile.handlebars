@@ -1,0 +1,32 @@
+<div class="ui text container">
+    {{> flash}}
+    <h4>Profile Information</h4>
+    <form class="ui form" method="POST" action="/account?_method=PUT">
+        <div class="field">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="{{user.email}}">
+        </div>
+        <div class="field">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" value="{{user.name}}">
+        </div>
+        <button class="ui button" type="submit">Update Profile</button>
+    </form>
+    <h4>Change Password</h4>
+    <form class="ui form" method="POST" action="/account?_method=PUT">
+        <div class="field">
+            <label for="password">New Password</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <div class="field">
+            <label for="confirm">Confirm Password</label>
+            <input type="password" name="confirm" id="confirm">
+        </div>
+        <button class="ui button" type="submit">Change Password</button>
+    </form>
+    <h4>Delete Account</h4>
+    <form class="ui form" method="POST" action="/account?_method=DELETE">
+        <p>You can delete your account, but keep in mind this action is irreversible.</p>
+        <button class="ui red button" type="submit">Delete my account</button>
+    </form>
+</div>

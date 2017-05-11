@@ -106,3 +106,69 @@ exports.signupPost = function(req, res, next) {
 		}
 	);
 };
+
+// -- POST /account -------------------------------------------------------------
+exports.accountGet = function(req, res) {
+    res.render('account/profile', {
+        title: 'My Account'
+    });
+};
+
+// -- PUT /account -------------------------------------------------------------
+exports.accountPut = function(req, res, next) {
+    if ('password' in req.body) {
+        req.assert('password', 'Password must be at least 4 characters long').len(4);
+        req.assert('confirm', 'Passwords must match').equals(req.body.password);
+    } else {
+        req.assert('email', 'Email is not valid').isEmail();
+        req.assert('email', 'Email cannot be blank').notEmpty();
+        req.sanitize('email').normalizeEmail({
+            remove_dots: false
+        });
+    }
+
+    var errors = req.validationErrors();
+
+    if (errors) {
+        req.flash('error', errors);
+        return res.redirect('/account');
+    }
+
+    User.findById(req.user.id, function(err, user) {
+        if ('password' in req.body) {
+            user.password = req.body.password;
+        } else {
+            user.email = req.body.email;
+            user.name = req.body.name;
+        }
+        user.save(function(err) {
+            if ('password' in req.body) {
+                req.flash('success', {
+                    msg: 'Your password has been changed.'
+                });
+            } else if (err && err.code === 11000) {
+                req.flash('error', {
+                    msg: 'The email address you have entered is already associated with another account.'
+                });
+            } else {
+                req.flash('success', {
+                    msg: 'Your profile information has been updated.'
+                });
+            }
+            res.redirect('/account');
+        });
+    });
+};
+
+// -- DELETE /account -------------------------------------------------------------
+exports.accountDelete = function(req, res, next) {
+    User.remove({
+        _id: req.user.id
+    }, function(err) {
+        req.logout();
+        req.flash('info', {
+            msg: 'Your account has been permanently deleted.'
+        });
+        res.redirect('/');
+    });
+};
