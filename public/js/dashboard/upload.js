@@ -11,9 +11,9 @@ function upload(file, signed_request, url, done) {
     xhr.send(file);
 }
 
-function sign_request(file, done) {
+function sign_request(file, new_filename, done) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/sign?file_name=" + file.name + "&file_type=" + file.type);
+    xhr.open("GET", "/sign?file_name=" + new_filename + "&file_type=" + file.type);
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -29,10 +29,10 @@ document.getElementById("file-selection").onchange = function() {
     var file = document.getElementById("file-selection").files[0];
     if (!file) return;
 
-    show_modal(file.name, function(filename, description) {
-        sign_request(file, function(response) {
+    show_modal(file.name, function(new_filename, description) {
+        sign_request(file, new_filename, function(response) {
             upload(file, response.signed_request, response.url, function(data) {
-                save_file(filename, description, response.url);
+                save_file(new_filename, description, response.url);
             });
         });
     });
