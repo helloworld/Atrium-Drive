@@ -11,7 +11,7 @@ function event_handlers() {
 }
 
 function perform_action(value, _id) {
-	if (value == "open in browser") return download_file(_id);
+	if (value == "download") return download_file(_id);
 	if (value == "delete") return delete_file(_id);
 	if (value == "edit name") return edit_file(_id);
 	if (value == "edit description") return edit_file(_id);
@@ -91,7 +91,7 @@ function add_file_to_page(file, description) {
 		        <i class="${file.icon} icon"></i> ${file.filename}
 		    </td>
 		    <td>${file.filetype}</td>
-		    <td><a href="${file.url}">Download</a></td>
+		    <td><a id="download-link${file._id}" href="${file.url}" target="_blank">Download</a></td>
 		    <td>${file["readable-date"]}</td>
 		    <td>
 		        <div class="ui description dropdown" id="description" data-content="${description}" data-variation="basic">
