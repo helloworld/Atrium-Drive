@@ -1,6 +1,6 @@
 let File = require("../models/file.model");
 let extension = require("file-extension");
-
+let awsController = require('./aws.controller');
 // -- Dashboard Controller -----------------------------------------------------
 
 // -- GET /dashboard -----------------------------------------------------------
@@ -48,6 +48,7 @@ exports.deleteFile = function(req, res) {
         if (!file) {
             return res.send('No file found with id: ' + req.body.id);
         }
+        awsController.delete(file.filename);
         res.send('200');
     });
 };

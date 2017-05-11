@@ -24,7 +24,6 @@ exports.sign = function(req, res) {
     };
     s3.getSignedUrl("putObject", options, function(err, data) {
         if (err) return res.send("Error with S3");
-        console.log(data);
         res.json({
             signed_request: data,
             url: "https://s3.amazonaws.com/" +
@@ -34,7 +33,20 @@ exports.sign = function(req, res) {
         });
     });
 };
+exports.delete = function(file_name) {
+    var options = {
+        Bucket: S3_BUCKET,
+        Delete: {
+            Objects: [{
+                Key: file_name
+            }]
+        }
+    };
 
-exports.delete = function() {
-    return;
+    s3.deleteObjects(options, function(err, data) {
+      if (err) throw err;
+    });
 }
+
+
+
